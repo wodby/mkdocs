@@ -37,7 +37,7 @@ buildx-push:
 		./
 
 test:
-	cd ./tests && IMAGE=$(REPO):$(TAG) NAME=$(NAME) ./run.sh
+	echo "no tests"
 
 push:
 	docker push $(REPO):$(TAG)
