@@ -1,13 +1,18 @@
 -include env_make
 
+# Accept legacy build arguments during the image revision transition.
+IMAGE_REVISION ?= $(STABILITY_TAG)
+
 TAG ?= latest
 
 REPO = wodby/mkdocs
 NAME = mkdocs
 
-ifneq ($(STABILITY_TAG),)
+ifneq ($(IMAGE_REVISION),)
     ifneq ($(TAG),latest)
-        override TAG := $(TAG)-$(STABILITY_TAG)
+        override TAG := $(TAG)-$(IMAGE_REVISION)
+    else ifneq ($(filter r%,$(IMAGE_REVISION)),)
+        override TAG := $(IMAGE_REVISION)
     endif
 endif
 
